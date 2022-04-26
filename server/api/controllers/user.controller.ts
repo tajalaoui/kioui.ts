@@ -1,6 +1,6 @@
 import { FilterQuery } from "mongoose"
-import User from "../models/user.model"
-import { IUser, IUserDoc } from "../interfaces/user/IUser"
+import User from "../../db/models/user.model"
+import { IUser, IUserDoc } from "../../db/interfaces/user/IUser"
 
 async function createUser(input: IUser) {
   return User.create<IUser>(input)
