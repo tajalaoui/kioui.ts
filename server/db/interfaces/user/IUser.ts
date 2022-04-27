@@ -1,8 +1,8 @@
 import { Document } from "mongoose"
 
 interface IUser {
-  email: string
   username: string
+  email: string
   password: string
 }
 

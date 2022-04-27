@@ -1,6 +1,7 @@
-import { Document } from "mongoose"
+import { Document, Types } from "mongoose"
 
 interface IPost {
+  // user: Types.ObjectId
   content: string
 }
 

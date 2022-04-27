@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, Types } from "mongoose"
 import { IPostDoc } from "../interfaces/post/IPost"
 
 const userSchema = new Schema(
@@ -6,8 +6,8 @@ const userSchema = new Schema(
     content: {
       type: String,
       required: true,
-      unique: true,
     },
+    // user: { type: Types.ObjectId, ref: "User", index: true, required: true },
   },
   { timestamps: true }
 )

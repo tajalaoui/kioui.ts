@@ -4,14 +4,15 @@ import { IUserDoc } from "../interfaces/user/IUser"
 
 const userSchema = new Schema(
   {
+    username: {
+      type: String,
+      required: true,
+      index: true,
+    },
     email: {
       type: String,
       required: true,
       unique: true,
-    },
-    username: {
-      type: String,
-      required: true,
     },
     password: {
       type: String,
@@ -21,7 +22,7 @@ const userSchema = new Schema(
   { timestamps: true }
 )
 
-userSchema.index({ email: 1 })
+// userSchema.index({ username: 1 })
 
 // userSchema.virtual("fullName").get(function (this: IUserDoc) {
 //   return `${this.firstName} ${this.lastName}`
@@ -48,7 +49,7 @@ userSchema.methods.comparePassword = async function (candidatePassword: string):
   // So we don't have to pass this into the interface method
   const user = this as IUserDoc
 
-  return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
+  return await bcrypt.compare(candidatePassword, user.password).catch((e) => false)
 }
 
 export default mongoose.model<IUserDoc>("User", userSchema)

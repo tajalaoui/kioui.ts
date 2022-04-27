@@ -10,6 +10,6 @@ app.use(bodyParser.json())
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use("/api", router)
+app.use("/", router)
 
 export { app }

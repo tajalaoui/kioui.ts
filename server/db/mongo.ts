@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+// TODO sync indexes
 export async function connectToMongo() {
   const mongoUri = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_NAME}`
   const options: object = {

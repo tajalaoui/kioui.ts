@@ -6,8 +6,8 @@ async function createPost(input: IPost) {
   return Post.create<IPost>(input)
 }
 
-async function findPost(query: FilterQuery<IPostDoc>, options: object = { lean: true }) {
-  return Post.findOne(query, null, options)
+async function findPost(query: FilterQuery<IPostDoc>, options?: object, leanValue = true) {
+  return Post.findOne(query, options).lean(leanValue)
 }
 
 export { createPost, findPost }
