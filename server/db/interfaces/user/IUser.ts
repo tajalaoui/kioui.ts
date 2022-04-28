@@ -1,6 +1,7 @@
-import { Document } from "mongoose"
+import { Document, Types } from "mongoose"
 
 interface IUser {
+  // id: Types.ObjectId
   username: string
   email: string
   password: string

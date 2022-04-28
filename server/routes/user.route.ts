@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express"
-import { createUser } from "../controllers/user.controller"
+import { ObjectId } from "mongoose"
+import { createUser, findUserById, findUser } from "../controllers/user.controller"
 const router: Router = Router()
 
 router.post("/", async (req: Request, res: Response) => {
@@ -10,6 +11,17 @@ router.post("/", async (req: Request, res: Response) => {
     password,
   })
   res.send(query)
+})
+
+router.get("/", async (req: Request, res: Response) => {
+  const { id } = req.query
+
+  try {
+    const query = await findUserById(id)
+    res.send(query)
+  } catch (e) {
+    res.send(e)
+  }
 })
 
 export const userRoute: Router = router

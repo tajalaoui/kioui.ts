@@ -1,4 +1,5 @@
 import { FilterQuery } from "mongoose"
+import { ObjectId } from "mongodb"
 import User from "../db/models/user.model"
 import { IUser, IUserDoc } from "../db/interfaces/user/IUser"
 
@@ -8,6 +9,10 @@ async function createUser(input: IUser) {
 
 async function findUser(query: FilterQuery<IUserDoc>, options?: object, leanValue = true) {
   return User.findOne(query, options).lean(leanValue)
+}
+
+async function findUserById(id: unknown, options?: object) {
+  return User.findById(id, options)
 }
 
 async function loginUser({
@@ -26,4 +31,4 @@ async function loginUser({
   return user.comparePassword(password)
 }
 
-export { createUser, findUser, loginUser }
+export { createUser, findUserById, findUser, loginUser }
