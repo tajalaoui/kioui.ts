@@ -3,10 +3,11 @@ import { createUser } from "../controllers/user.controller"
 const router: Router = Router()
 
 router.post("/", async (req: Request, res: Response) => {
+  const { username, email, password } = req.body
   const query = await createUser({
-    email: "tajeddine.js@hotmail.com",
-    username: "Tajeddine",
-    password: "123",
+    username,
+    email,
+    password,
   })
   res.send(query)
 })
