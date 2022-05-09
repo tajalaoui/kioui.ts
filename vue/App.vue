@@ -1,12 +1,14 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from "./components/HelloWorld.vue"
+import Home from "./views/Home.vue"
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <!-- <Home msg="Hello Vue 3 + TypeScript + Vite" /> -->
+  <nav>
+    <router-link to="/">Home</router-link>
+    <router-link to="/test">Live chat</router-link>
+  </nav>
+  <router-view />
 </template>
 
 <style>
@@ -17,5 +19,13 @@ import HelloWorld from "./components/HelloWorld.vue"
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+nav {
+  margin-bottom: 5%;
+}
+
+a {
+  margin: 0 1%;
 }
 </style>

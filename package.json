@@ -8,7 +8,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "front": "vite",
-    "server": "ts-node-dev server/server.ts"
+    "server": "ts-node-dev server/app/server.ts"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -24,8 +24,11 @@
     "helmet": "^5.0.2",
     "jest": "^27.5.1",
     "mongoose": "^6.3.1",
+    "socket.io": "^4.0.1",
+    "socket.io-client": "^4.0.1",
     "ts-jest": "^27.1.4",
-    "vue": "^3.2.25"
+    "vue": "^3.2.33",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

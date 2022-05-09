@@ -3,13 +3,12 @@ import { ref } from "vue"
 import axios from "axios"
 import { API } from "../services/API.ts"
 
-defineProps<{ msg: string }>()
 const count = ref(0)
 
 const id = ref()
 const user = ref()
 
-const getUser = async () => {
+async function getUser() {
   try {
     const response = await axios.get(`http://localhost:3000/user`, { params: { id: id.value } })
     user.value = response.data.username
@@ -22,11 +21,11 @@ const getUser = async () => {
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <form @submit.prevent="getUser">
+    <input v-model="id" type="text" />
+    <button type="submit">Submit</button>
+  </form>
 
-  <!--  -->
-  <input v-model="id" type="text" />
-  <button @click="getUser" type="submit">Submit</button>
   <h1>{{ user }}</h1>
 </template>
 
