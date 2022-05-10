@@ -3,8 +3,10 @@ import { ObjectId } from "mongoose"
 import { createUser, findUserById, findUser } from "../controllers/user.controller"
 const router: Router = Router()
 
+// Create user
 router.post("/", async (req: Request, res: Response) => {
   const { username, email, password } = req.body
+
   const query = await createUser({
     username,
     email,
@@ -13,6 +15,7 @@ router.post("/", async (req: Request, res: Response) => {
   res.send(query)
 })
 
+// Find user
 router.get("/", async (req: Request, res: Response) => {
   const { id } = req.query
 

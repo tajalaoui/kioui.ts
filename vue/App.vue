@@ -1,12 +1,11 @@
-<script setup lang="ts">
-import Home from "./views/Home.vue"
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <!-- <Home msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <nav>
     <router-link to="/">Home</router-link>
-    <router-link to="/test">Live chat</router-link>
+    <!-- <router-link to="/test">Live chat</router-link> -->
+    <router-link to="/register">Register</router-link>
+    <router-link to="/login">Login</router-link>
   </nav>
   <router-view />
 </template>

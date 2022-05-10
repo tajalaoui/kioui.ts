@@ -10,7 +10,8 @@ const user = ref()
 
 async function getUser() {
   try {
-    const response = await axios.get(`http://localhost:3000/user`, { params: { id: id.value } })
+    const response = await axios.get(`http://localhost:3000/api/user`, { params: { id: id.value } })
+
     user.value = response.data.username
     // const response = await API().get("/user", { params: { id: id.value } })
     // user.value = response.data.username
