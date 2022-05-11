@@ -1,13 +1,13 @@
 import { FilterQuery } from "mongoose"
 import { ObjectId } from "mongodb"
 import User from "../db/models/user.model"
-import { IUser, IUserDoc } from "../interfaces/IUser"
+import { IUser } from "../interfaces/IUser"
 
 async function createUser(input: IUser) {
   return User.create<IUser>(input)
 }
 
-async function findUser(query: FilterQuery<IUserDoc>, options?: object, leanValue = false) {
+async function findUser(query: FilterQuery<IUser>, options?: object, leanValue = false) {
   return User.findOne(query, options).lean(leanValue)
 }
 
@@ -23,7 +23,6 @@ async function loginUser({
   password: IUser["password"]
 }) {
   const user = await findUser({ email }, { lean: false })
-  console.log(user)
   if (!user) throw new Error("User does not exist")
 
   return user.findByCredentials(email, password)

@@ -1,4 +1,4 @@
-import { Document, Types } from "mongoose"
+import { Model } from "mongoose"
 
 interface IUser {
   username: string
@@ -6,10 +6,10 @@ interface IUser {
   password: string
 }
 
-interface IUserDoc extends IUser, Document {
-  createdAt: Date
-  updatedAt: Date
+interface IUserMethods {
   findByCredentials(userEmail: string, userPassword: string): Promise<boolean>
 }
 
-export { IUser, IUserDoc }
+type UserModel = Model<IUser, unknown, IUserMethods>
+
+export { IUser, IUserMethods, UserModel }
