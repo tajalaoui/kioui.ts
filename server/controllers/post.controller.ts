@@ -1,6 +1,6 @@
 import { FilterQuery } from "mongoose"
 import Post from "../db/models/post.model"
-import { IPost, IPostDoc } from "../../interfaces/models/IPost"
+import { IPost, IPostDoc } from "../interfaces/IPost"
 
 async function createPost(input: IPost) {
   return Post.create<IPost>(input)
