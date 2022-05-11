@@ -2,7 +2,6 @@
 import { reactive, ref } from "vue"
 import type { Ref } from "vue"
 import { createUserService } from "../services/user.service"
-import { IUser } from "../../interfaces/models/IUser"
 
 const user = reactive({ username: "", email: "", password: "" })
 

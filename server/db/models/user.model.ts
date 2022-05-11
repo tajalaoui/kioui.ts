@@ -48,7 +48,8 @@ userSchema.methods.findByCredentials = async function (
   const errorMessage =
     "The email address or password that you've entered doesn't match any account."
 
-  const user = await User.findOne({ email: userEmail })
+  // TODO try this instead of USer
+  const user = await this.findOne({ email: userEmail })
   if (!user) throw new Error(errorMessage)
   const isMatch = await bcrypt.compare(userPassword, user.password)
   if (!isMatch) throw new Error(errorMessage)
@@ -58,6 +59,4 @@ userSchema.methods.findByCredentials = async function (
   return isUser
 }
 
-const User = mongoose.model<IUserDoc>("User", userSchema)
-
-export default User
+export default mongoose.model<IUserDoc>("User", userSchema)
