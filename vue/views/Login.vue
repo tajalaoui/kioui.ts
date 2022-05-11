@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import type { Ref } from 'vue'
-import { getUserService } from "../services/user.service"
+import { ref, reactive } from "vue"
+import type { Ref } from "vue"
+import { loginUserService } from "../services/user.service"
 
-const id = ref()
-// const user: Ref<string> = ref("")
-const user = ref()
+const user = reactive({ email: "", password: "" })
 
 async function getUser() {
   try {
-    const response = await getUserService(id.value)
-    user.value = response.data
+    await loginUserService(user)
   } catch (e) {
     console.log(e)
   }
@@ -19,9 +16,8 @@ async function getUser() {
 
 <template>
   <form @submit.prevent="getUser">
-    <input v-model="id" type="text" />
+    <input v-model="user.email" type="email" />
+    <input v-model="user.password" type="text" />
     <button type="submit">Submit</button>
   </form>
-
-  <h1>{{ user }}</h1>
 </template>

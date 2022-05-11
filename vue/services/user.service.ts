@@ -12,7 +12,12 @@ async function getUserService(id: string): Promise<AxiosResponse<IUser>> {
   return await axios.get(`/user`, { params: { id } })
 }
 
-async function createUserService(user: Ref<IUser>): Promise<AxiosResponse> {
+async function loginUserService(userData: object): Promise<AxiosResponse<IUser>> {
+  // return await axios.get(`/user/${id}`)
+  return await axios.post(`/user/login`, userData)
+}
+
+async function createUserService(user: object): Promise<AxiosResponse> {
   return await axios.post("/user", user)
 }
 
@@ -24,4 +29,11 @@ async function deleteUserService(id: string): Promise<AxiosResponse> {
   return await axios.delete(`/user/${id}`)
 }
 
-export { getUsersService, getUserService, createUserService, updateUserService, deleteUserService }
+export {
+  getUsersService,
+  getUserService,
+  loginUserService,
+  createUserService,
+  updateUserService,
+  deleteUserService,
+}

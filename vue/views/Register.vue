@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { reactive, ref } from "vue"
 import type { Ref } from "vue"
 import { createUserService } from "../services/user.service"
 import { IUser } from "../../interfaces/models/IUser"
 
-const user: Ref<IUser> = ref({ username: "", email: "", password: "" })
+const user = reactive({ username: "", email: "", password: "" })
 
 async function createUser() {
   try {
@@ -17,9 +17,9 @@ async function createUser() {
 
 <template>
   <form @submit.prevent="createUser">
-    <input v-model="user.username" type="text" />
-    <input v-model="user.email" type="text" />
-    <input v-model="user.password" type="text" />
+    <input v-model="user.username" placeholder="username" type="text" />
+    <input v-model="user.email" placeholder="email" type="email" />
+    <input v-model="user.password" placeholder="password" type="password" />
     <button type="submit">Submit</button>
   </form>
 </template>

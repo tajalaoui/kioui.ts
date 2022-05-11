@@ -23,12 +23,10 @@ async function loginUser({
   password: IUserDoc["password"]
 }) {
   const user = await findUser({ email }, { lean: false })
+  if (!user) throw new Error("User does not exist")
+  console.log(user)
 
-  if (!user) {
-    throw new Error("User does not exist")
-  }
-
-  return user.comparePassword(password)
+  return user.findByCredentials(email, password)
 }
 
 export { createUser, findUserById, findUser, loginUser }
