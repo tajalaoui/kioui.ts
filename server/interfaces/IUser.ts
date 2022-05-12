@@ -10,6 +10,6 @@ interface IUserMethods {
   findByCredentials(userEmail: string, userPassword: string): Promise<boolean>
 }
 
-type UserModel = Model<IUser, unknown, IUserMethods>
+type UserModel = Model<IUser, any, IUserMethods>
 
 export { IUser, IUserMethods, UserModel }

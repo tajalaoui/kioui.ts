@@ -25,7 +25,7 @@ async function loginUser({
   const user = await findUser({ email }, { lean: false })
   if (!user) throw new Error("User does not exist")
 
-  return user.findByCredentials(email, password)
+  return user.isValidCredentials(password)
 }
 
 export { createUser, findUserById, findUser, loginUser }

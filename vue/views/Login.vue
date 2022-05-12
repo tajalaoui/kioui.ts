@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue"
-import type { Ref } from "vue"
 import { loginUserService } from "../services/user.service"
 
 const user = reactive({ email: "", password: "" })
@@ -17,7 +16,7 @@ async function getUser() {
 <template>
   <form @submit.prevent="getUser">
     <input v-model="user.email" type="email" />
-    <input v-model="user.password" type="text" />
+    <input v-model="user.password" type="password" />
     <button type="submit">Submit</button>
   </form>
 </template>

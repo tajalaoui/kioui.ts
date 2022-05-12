@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 import bcrypt from "bcrypt"
 import { IUser, IUserMethods, UserModel } from "../../interfaces/IUser"
 
@@ -33,24 +33,16 @@ userSchema.pre("save", async function (next) {
   return next()
 })
 
-userSchema.methods.findByCredentials = async function (
-  userEmail: string,
-  userPassword: string
-): Promise<boolean> {
+userSchema.methods.isValidCredentials = async function (userPassword: string): Promise<boolean> {
   const errorMessage =
     "The email address or password that you've entered doesn't match any account."
 
-  // TODO try this instead of USer
-  const user = await User.findOne({ email: userEmail })
-  if (!user) throw new Error(errorMessage)
-  const isMatch = await bcrypt.compare(userPassword, user.password)
+  const isMatch = await bcrypt.compare(userPassword, this.password)
   if (!isMatch) throw new Error(errorMessage)
 
-  const isUser = user ? true : false
-
-  return isUser
+  return isMatch
 }
 
-const User = mongoose.model<IUser, UserModel>("User", userSchema)
+const User = model<IUser, UserModel>("User", userSchema)
 
 export default User

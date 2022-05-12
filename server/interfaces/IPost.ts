@@ -1,14 +1,6 @@
-import { Document, Types } from "mongoose"
-
 interface IPost {
-  // user: Types.ObjectId
   content: string
+  // user: ObjectId
 }
 
-interface IPostDoc extends IPost, Document {
-  createdAt: Date
-  updatedAt: Date
-  comparePassword(candidatePassword: string): Promise<boolean>
-}
-
-export { IPost, IPostDoc }
+export { IPost }

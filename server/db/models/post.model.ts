@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose"
-import { IPostDoc } from "../../interfaces/IPost"
+import { IPost } from "../../interfaces/IPost"
 
 const userSchema = new Schema(
   {
@@ -12,4 +12,4 @@ const userSchema = new Schema(
   { timestamps: true }
 )
 
-export default mongoose.model<IPostDoc>("Post", userSchema)
+export default mongoose.model<IPost>("Post", userSchema)

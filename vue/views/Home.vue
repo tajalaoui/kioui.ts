@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import axios from "axios"
-import { API } from "../services/API.ts"
 
 const count = ref(0)
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue"
-import type { Ref } from "vue"
+import { reactive } from "vue"
 import { createUserService } from "../services/user.service"
 
 const user = reactive({ username: "", email: "", password: "" })
