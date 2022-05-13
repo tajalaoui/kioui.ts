@@ -1,35 +1,26 @@
 import { AxiosResponse } from "axios"
 import axios from "./axios"
 
-async function getUsersService(): Promise<AxiosResponse<[]>> {
+export async function getUsersService(): Promise<AxiosResponse<[]>> {
   return await axios.get("/user")
 }
 
-async function getUserService(id: string): Promise<AxiosResponse> {
+export async function getUserService(id: string): Promise<AxiosResponse> {
   return await axios.get(`/user`, { params: { id } })
 }
 
-async function loginUserService(userData: object): Promise<AxiosResponse> {
+export async function loginUserService(userData: object): Promise<AxiosResponse> {
   return await axios.post(`/user/login`, userData)
 }
 
-async function createUserService(user: object): Promise<AxiosResponse> {
+export async function createUserService(user: object): Promise<AxiosResponse> {
   return await axios.post("/user", user)
 }
 
-async function updateUserService(id: string, newTask: object): Promise<AxiosResponse> {
+export async function updateUserService(id: string, newTask: object): Promise<AxiosResponse> {
   return await axios.put(`/user/${id}`, newTask)
 }
 
-async function deleteUserService(id: string): Promise<AxiosResponse> {
+export async function deleteUserService(id: string): Promise<AxiosResponse> {
   return await axios.delete(`/user/${id}`)
-}
-
-export {
-  getUsersService,
-  getUserService,
-  loginUserService,
-  createUserService,
-  updateUserService,
-  deleteUserService,
 }
