@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { getPostsService } from "../services/post.service"
+import PostCard from "../components/PostCard.vue"
 
-let posts = ref()
+const posts = ref()
 
 onMounted(async () => {
-  const response = await getPosts()
-  posts.value = response
+  const response = await getPostsService()
+  posts.value = response.data
 })
-
-console.log(posts.value)
-
-async function getPosts() {
-  try {
-    await getPostsService()
-  } catch (e) {
-    console.log(e)
-  }
-}
 </script>
+
+<template>
+  <div v-for="post in posts">
+    <PostCard :key="post._id" :post="post" />
+  </div>
+</template>

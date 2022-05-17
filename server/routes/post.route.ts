@@ -1,12 +1,15 @@
 import { Request, Response, Router } from "express"
 import { createPost, findPosts, findPost } from "../controllers/post.controller"
+// import { ObjectId } from "mongoose"
+import { ObjectId } from "mongodb"
 
 const router: Router = Router()
 
 // * Create post
 router.post("/", async (req: Request, res: Response) => {
   const query = await createPost({
-    content: "loremipsum",
+    content: "hello marrakech",
+    user: new ObjectId("6283693c94b22792202afac9"),
   })
   res.send(query)
 })

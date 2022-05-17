@@ -1,6 +1,6 @@
-interface IPost {
-  content: string
-  // user: ObjectId
-}
+import { Types } from "mongoose"
 
-export { IPost }
+export interface IPost {
+  // user: Types.ObjectId
+  content: string
+}

@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 import bcrypt from "bcrypt"
 import { IUser, IUserMethods, UserModel } from "../../interfaces/IUser"
 

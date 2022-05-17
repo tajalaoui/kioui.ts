@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // user: { type: Types.ObjectId, ref: "User", index: true, required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true, required: true },
   },
   { timestamps: true }
 )
