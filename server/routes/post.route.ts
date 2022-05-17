@@ -17,6 +17,7 @@ router.post("/", async (req: Request, res: Response) => {
 // * Get posts
 router.get("/all", async (req: Request, res: Response) => {
   const query = await findPosts()
+  console.log(req.session)
   res.send(query)
 })
 

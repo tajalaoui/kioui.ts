@@ -1,11 +1,19 @@
 import express, { Application } from "express"
 const app: Application = express()
+import session from "express-session"
 import bodyParser from "body-parser"
 import helmet from "helmet"
-import { router } from "../routes/routes"
 import cors from "cors"
 import "dotenv/config"
+import { router } from "../routes/routes"
 
+app.use(
+  session({
+    secret: process.env.EXPRESS_SESSION_SECRET,
+    cookie: { maxAge: Number(process.env.EXPRESS_SESSION_AGE) },
+    saveUninitialized: Boolean(process.env.EXPRESS_SESSION_AGE_SAVE_UNINTIALIZED),
+  })
+)
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
