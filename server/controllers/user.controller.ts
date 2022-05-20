@@ -1,10 +1,11 @@
 import { FilterQuery } from "mongoose"
-import { ObjectId } from "mongodb"
 import User from "../db/models/user.model"
 import { IUser } from "../interfaces/IUser"
 
 async function createUser(input: IUser) {
-  return User.create<IUser>(input)
+  const user = await User.create<IUser>(input)
+  const token = await user.generateAuthToken()
+  return { user, token }
 }
 
 async function findUser(query: FilterQuery<IUser>, options?: object, leanValue = false) {
@@ -24,8 +25,10 @@ async function loginUser({
 }) {
   const user = await findUser({ email }, { lean: false })
   if (!user) throw new Error("User does not exist")
+  const token = await user.generateAuthToken()
+  user.isValidCredentials(password)
 
-  return user.isValidCredentials(password)
+  return { user, token }
 }
 
 export { createUser, findUserById, findUser, loginUser }

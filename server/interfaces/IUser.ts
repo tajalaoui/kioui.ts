@@ -7,7 +7,8 @@ interface IUser {
 }
 
 interface IUserMethods {
-  findByCredentials(userEmail: string, userPassword: string): Promise<boolean>
+  isValidCredentials(userPassword: string): Promise<boolean>
+  generateAuthToken(): Promise<Object>
 }
 
 type UserModel = Model<IUser, any, IUserMethods>

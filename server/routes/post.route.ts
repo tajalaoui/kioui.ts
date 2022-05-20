@@ -1,15 +1,16 @@
 import { Request, Response, Router } from "express"
 import { createPost, findPosts, findPost } from "../controllers/post.controller"
-// import { ObjectId } from "mongoose"
-import { ObjectId } from "mongodb"
 
 const router: Router = Router()
 
 // * Create post
 router.post("/", async (req: Request, res: Response) => {
+  const { content, user } = req.body
+
+  // TODO implement this route in the frontend
   const query = await createPost({
-    content: "hello marrakech",
-    user: new ObjectId("6283693c94b22792202afac9"),
+    content,
+    user,
   })
   res.send(query)
 })
@@ -17,7 +18,7 @@ router.post("/", async (req: Request, res: Response) => {
 // * Get posts
 router.get("/all", async (req: Request, res: Response) => {
   const query = await findPosts()
-  console.log(req.session)
+  // console.log(+process.env.EXPRESS_SESSION_AGE_SAVE_UNINTIALIZED === 1 ? true : false)
   res.send(query)
 })
 

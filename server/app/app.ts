@@ -7,13 +7,15 @@ import cors from "cors"
 import "dotenv/config"
 import { router } from "../routes/routes"
 
-app.use(
-  session({
-    secret: process.env.EXPRESS_SESSION_SECRET,
-    cookie: { maxAge: Number(process.env.EXPRESS_SESSION_AGE) },
-    saveUninitialized: Boolean(process.env.EXPRESS_SESSION_AGE_SAVE_UNINTIALIZED),
-  })
-)
+// app.use(
+//   session({
+//     resave: true,
+//     secret: process.env.EXPRESS_SESSION_SECRET,
+//     cookie: { maxAge: Number(process.env.EXPRESS_SESSION_AGE) },
+//     saveUninitialized: +process.env.EXPRESS_SESSION_AGE_SAVE_UNINTIALIZED === 1 ? true : false,
+//   })
+// )
+
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

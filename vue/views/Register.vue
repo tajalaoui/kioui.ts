@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { reactive } from "vue"
-import { createUserService } from "../services/user.service"
+import { useAuthStore } from "../store/auth"
+import { registerService } from "../services/auth.service"
 
+const auth = useAuthStore()
 const user = reactive({ username: "", email: "", password: "" })
 
-async function createUser() {
+async function register() {
   try {
-    await createUserService(user)
+    const userData = await registerService(user)
+    auth.register(userData)
   } catch (e) {
     console.log(e)
   }
@@ -14,7 +17,7 @@ async function createUser() {
 </script>
 
 <template>
-  <form @submit.prevent="createUser">
+  <form @submit.prevent="register">
     <input v-model="user.username" placeholder="username" type="text" />
     <input v-model="user.email" placeholder="email" type="email" />
     <input v-model="user.password" placeholder="password" type="password" />

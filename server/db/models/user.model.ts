@@ -1,4 +1,5 @@
-import mongoose, { Schema, model, Types } from "mongoose"
+import { Schema, model } from "mongoose"
+import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { IUser, IUserMethods, UserModel } from "../../interfaces/IUser"
 
@@ -32,6 +33,11 @@ userSchema.pre("save", async function (next) {
 
   return next()
 })
+
+// Generating token after registering OR login
+userSchema.methods.generateAuthToken = async function () {
+  return await jwt.sign({ userId: this._id.toString() }, process.env.JWT_SECRET)
+}
 
 userSchema.methods.isValidCredentials = async function (userPassword: string): Promise<boolean> {
   const errorMessage =

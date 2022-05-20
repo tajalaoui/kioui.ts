@@ -1,4 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from "vue-router"
+import { useAuthStore } from "./store/auth"
+
+const auth = useAuthStore()
+const router = useRouter()
+
+function logout() {
+  auth.logout()
+  router.push("/login")
+}
+</script>
 
 <template>
   <nav>
@@ -6,6 +17,7 @@
     <!-- <router-link to="/test">Live chat</router-link> -->
     <router-link to="/register">Register</router-link>
     <router-link to="/login">Login</router-link>
+    <button @click="logout">Logout</button>
   </nav>
   <router-view />
 </template>

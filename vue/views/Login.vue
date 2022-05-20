@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue"
-import { loginUserService } from "../services/user.service"
+import { reactive } from "vue"
+import { useAuthStore } from "../store/auth"
+import { loginService } from "../services/auth.service"
 
+const auth = useAuthStore()
 const user = reactive({ email: "", password: "" })
 
 async function getUser() {
   try {
-    await loginUserService(user)
+    const userData = await loginService(user)
+    auth.login(userData)
   } catch (e) {
     console.log(e)
   }
