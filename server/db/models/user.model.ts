@@ -35,8 +35,9 @@ userSchema.pre("save", async function (next) {
 })
 
 // Generating token after registering OR login
+// TODO add expiration
 userSchema.methods.generateAuthToken = async function () {
-  return await jwt.sign({ userId: this._id.toString() }, process.env.JWT_SECRET)
+  return jwt.sign({ userId: this._id.toString() }, process.env.JWT_SECRET)
 }
 
 userSchema.methods.isValidCredentials = async function (userPassword: string): Promise<boolean> {

@@ -1,12 +1,22 @@
 <script setup lang="ts">
+import { onBeforeMount } from "vue"
 import { useRouter } from "vue-router"
-import { useAuthStore } from "./store/auth"
+import { logout } from "./composables/auth.composable"
+import { isToken, setToken } from "./composables/token.composable"
+import axios from "./services/axios"
 
-const auth = useAuthStore()
 const router = useRouter()
 
-function logout() {
-  auth.logout()
+// ! Repetitive code
+onBeforeMount(() => {
+  const token: string = localStorage.getItem("token")
+  const isTokenValid: boolean = token ? true : false
+
+  if (isTokenValid) setToken(token)
+})
+
+function onLogout() {
+  logout()
   router.push("/login")
 }
 </script>
@@ -17,7 +27,7 @@ function logout() {
     <!-- <router-link to="/test">Live chat</router-link> -->
     <router-link to="/register">Register</router-link>
     <router-link to="/login">Login</router-link>
-    <button @click="logout">Logout</button>
+    <button @click="onLogout">Logout</button>
   </nav>
   <router-view />
 </template>

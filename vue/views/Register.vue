@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { reactive } from "vue"
-import { useAuthStore } from "../store/auth"
+import { setToken } from "../composables/token.composable"
 import { registerService } from "../services/auth.service"
 
-const auth = useAuthStore()
 const user = reactive({ username: "", email: "", password: "" })
 
-async function register() {
+async function onRegister() {
   try {
-    const userData = await registerService(user)
-    auth.register(userData)
+    const token = await registerService(user)
+    setToken(token)
   } catch (e) {
     console.log(e)
   }
@@ -17,7 +16,7 @@ async function register() {
 </script>
 
 <template>
-  <form @submit.prevent="register">
+  <form @submit.prevent="onRegister">
     <input v-model="user.username" placeholder="username" type="text" />
     <input v-model="user.email" placeholder="email" type="email" />
     <input v-model="user.password" placeholder="password" type="password" />

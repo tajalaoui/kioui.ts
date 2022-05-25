@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express"
 import { createUser, findUserById, loginUser } from "../controllers/user.controller"
+
 const router: Router = Router()
 
 // Find user

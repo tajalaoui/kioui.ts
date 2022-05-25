@@ -1,35 +1,40 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import Home from "../views/Home.vue"
-import Test from "../views/test.vue"
-import Register from "../views/Register.vue"
-import Login from "../views/Login.vue"
+import { isToken } from "../composables/token.composable"
+
+declare module "vue-router" {
+  interface RouteMeta {
+    isAdmin?: boolean
+    requiresAuth: boolean
+  }
+}
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("../views/Home.vue"),
+    meta: { requiresAuth: true },
   },
-  // {
-  //   path: "/test",
-  //   name: "Test",
-  //   component: Test,
-  // },
   {
     path: "/register",
     name: "Register",
-    component: Register,
+    component: () => import("../views/Register.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: () => import("../views/Login.vue"),
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !isToken()) next({ name: "Login" })
+  else next()
 })
 
 export default router

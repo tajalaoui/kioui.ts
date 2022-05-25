@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { reactive } from "vue"
-import { useAuthStore } from "../store/auth"
+import { setToken } from "../composables/token.composable"
 import { loginService } from "../services/auth.service"
 
-const auth = useAuthStore()
 const user = reactive({ email: "", password: "" })
 
-async function getUser() {
+async function onLogin() {
   try {
-    const userData = await loginService(user)
-    auth.login(userData)
+    const token = await loginService(user)
+    setToken(token)
   } catch (e) {
     console.log(e)
   }
@@ -17,7 +16,7 @@ async function getUser() {
 </script>
 
 <template>
-  <form @submit.prevent="getUser">
+  <form @submit.prevent="onLogin">
     <input v-model="user.email" type="email" />
     <input v-model="user.password" type="password" />
     <button type="submit">Submit</button>

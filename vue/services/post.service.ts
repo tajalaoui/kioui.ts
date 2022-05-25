@@ -1,7 +1,8 @@
 import { AxiosResponse } from "axios"
 import axios from "./axios"
+// TODO resolve naming
 
-export async function getPostervice(id: string): Promise<AxiosResponse<[]>> {
+export async function getPostService(id: string): Promise<AxiosResponse<[]>> {
   return await axios.get("/post", { params: { id } })
 }
 
