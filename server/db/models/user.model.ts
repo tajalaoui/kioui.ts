@@ -34,7 +34,6 @@ userSchema.pre("save", async function (next) {
   return next()
 })
 
-// Generating token after registering OR login
 // TODO add expiration
 userSchema.methods.generateAuthToken = async function () {
   return jwt.sign({ userId: this._id.toString() }, process.env.JWT_SECRET)

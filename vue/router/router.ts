@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import { isToken } from "../composables/token.composable"
+import { getToken, isToken, setToken } from "../composables/token.composable"
 
 declare module "vue-router" {
   interface RouteMeta {
@@ -19,11 +19,13 @@ const routes: Array<RouteRecordRaw> = [
     path: "/register",
     name: "Register",
     component: () => import("../views/Register.vue"),
+    meta: { requiresAuth: false },
   },
   {
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
+    meta: { requiresAuth: false },
   },
 ]
 
@@ -32,9 +34,21 @@ const router = createRouter({
   routes,
 })
 
+// 1 Verify token validation via api
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth && !isToken()) next({ name: "Login" })
+//   else {
+//     setToken()
+//     next()
+//   }
+// })
+
+// 2 Verify if token exists
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !isToken()) next({ name: "Login" })
-  else next()
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (getToken()) next()
+    else next({ name: "Login" })
+  } else next()
 })
 
 export default router

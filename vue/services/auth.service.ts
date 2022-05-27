@@ -7,6 +7,12 @@ export async function registerService(user: object) {
 }
 
 export async function loginService(userData: object) {
-  const result: AxiosResponse = await axios.post(`/auth/login`, userData)
+  const result: AxiosResponse = await axios.post("/auth/login", userData)
   return result.data
 }
+
+export async function verifyJwtService(token: string | boolean): Promise<boolean> {
+  return await axios.post("/auth/verifyJwt", token)
+}
+
+// TODO Handle logout

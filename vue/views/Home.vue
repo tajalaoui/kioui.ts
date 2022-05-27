@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
-import { getPostsService } from "../services/post.service"
+import { getPostService } from "../services/post.service"
 import PostCard from "../components/PostCard.vue"
+import { getToken } from "../composables/token.composable";
 
 const posts = ref()
 
 onMounted(async () => {
-  const response = await getPostsService()
+  const response = await getPostService()
   posts.value = response.data
 })
 </script>

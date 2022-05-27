@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken"
 
 export function isAuth(req, res, next) {
-  let token
+  let token: string
   const authHeader = req.headers["authorization"]
-
-  // TODO improve token verification
 
   // Authentication
   const isAuthenticated = authHeader ? true : false
@@ -14,9 +12,5 @@ export function isAuth(req, res, next) {
   // Authorization
   const isAuthorized = isAuthenticated ? true : false
   if (!isAuthorized) res.sendStatus(403)
-  else jwt.verify(token, process.env.JWT_SECRET)
-
-  req.token = token
-  
-  next()
+  else jwt.verify(token, process.env.JWT_SECRET) ? next() : res.sendStatus(403)
 }

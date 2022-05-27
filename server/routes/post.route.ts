@@ -9,28 +9,33 @@ const router: Router = Router()
 router.post("/", async (req: Request, res: Response) => {
   const { content, user } = req.body
 
-  // TODO implement this route in the frontend
-  const query = await createPost({
-    content,
-    user,
-  })
-  res.send(query)
+  try {
+    // TODO implement this route in the frontend
+    const query = await createPost({
+      content,
+      user,
+    })
+    res.send(query)
+  } catch (error) {
+    res.send(error)
+  }
 })
 
-// * Get posts
-router.get("/all", isAuth, async (req: Request, res: Response) => {
-  const query = await findPosts()
-  // console.log(+process.env.EXPRESS_SESSION_AGE_SAVE_UNINTIALIZED === 1 ? true : false)
-  res.send(query)
-})
+router.get("/:id?", isAuth, async (req: Request, res: Response) => {
+  try {
+    if (req.query.id) {
+      const post = await findPost({
+        _id: req.query.id,
+      })
 
-// * Get post
-// TODO Add optional params
-router.get("/", async (req: Request, res: Response) => {
-  const query = await findPost({
-    content: "loremipsum",
-  })
-  res.send(query)
+      return res.send(post)
+    }
+
+    const posts = await findPosts()
+    res.send(posts)
+  } catch (e) {
+    res.send(e)
+  }
 })
 
 export const postRoute: Router = router
