@@ -2,16 +2,12 @@ import axios from "../services/axios"
 import { verifyJwtService } from "../services/auth.service"
 
 export function getToken() {
-  const token: string = localStorage.getItem("token")
-
-  if (!token) return false
-
-  return token
+  return localStorage.getItem("token")
 }
 
 export async function isToken(): Promise<boolean> {
   const token = getToken()
-  const isJwt = await verifyJwtService(token)
+  const isJwt = await verifyJwtService(token ? token : false)
 
   if (!isJwt) {
     localStorage.removeItem("token")
@@ -22,6 +18,5 @@ export async function isToken(): Promise<boolean> {
 }
 
 export function setToken(token: string): void {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
   localStorage.setItem("token", token)
 }

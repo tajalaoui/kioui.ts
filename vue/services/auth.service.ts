@@ -2,13 +2,15 @@ import { AxiosResponse } from "axios"
 import axios from "./axios"
 
 export async function registerService(user: object) {
-  const result: AxiosResponse = await axios.post("/auth/register", user)
-  return result.data
+  const response: AxiosResponse = await axios.post("/auth/register", user)
+  return response.data
 }
 
 export async function loginService(userData: object) {
-  const result: AxiosResponse = await axios.post("/auth/login", userData)
-  return result.data
+  const response: AxiosResponse = await axios.post("/auth/login", userData)
+  axios.defaults.headers.common["Authorization"] = `Bearer ${response.data}`
+  console.log(response)
+  return response.data
 }
 
 export async function verifyJwtService(token: string | boolean): Promise<boolean> {
