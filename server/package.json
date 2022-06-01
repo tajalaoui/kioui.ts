@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "ts-node-dev ./app/server.ts",
+    "start": "ts-node-dev ./app/server.ts",
     "debug": "ts-node --inspect ./app/server.ts",
     "lint": "eslint . --ext .ts"
   },
