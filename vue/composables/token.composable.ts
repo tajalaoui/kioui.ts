@@ -5,16 +5,12 @@ export function getToken() {
   return localStorage.getItem("token")
 }
 
-export async function isToken(): Promise<boolean> {
-  const token = getToken()
-  const isJwt = await verifyJwtService(token ? token : false)
+export async function isToken(token: string): Promise<boolean> {
+  const isJwt = await verifyJwtService(token)
 
-  if (!isJwt) {
-    localStorage.removeItem("token")
-    return false
-  }
-
-  return true
+  // if (!isJwt) return false
+  // return true
+  return isJwt ? true : false
 }
 
 export function setToken(token: string): void {

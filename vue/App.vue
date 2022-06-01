@@ -1,23 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { logout } from "./composables/auth.composable"
-import { isToken, setToken } from "./composables/token.composable"
-import axios from "./services/axios"
 
 const router = useRouter()
 
-onMounted(() => {
-  // const token = isToken()
-
-  // if (!token)
-
-  // if (isTokenValid) setToken(token)
-})
-
 function onLogout() {
   logout()
-  router.push("/login")
+  router.push({name: "Login"})
 }
 </script>
 

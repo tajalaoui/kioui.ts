@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import { getToken, isToken, setToken } from "../composables/token.composable"
+import { getToken, isToken } from "../composables/token.composable"
 
 declare module "vue-router" {
   interface RouteMeta {
@@ -36,11 +36,11 @@ const router = createRouter({
 
 // 1 Verify token validation via api
 // router.beforeEach((to, from, next) => {
-//   if (to.meta.requiresAuth && !isToken()) next({ name: "Login" })
-//   else {
-//     setToken()
-//     next()
-//   }
+//   const token = getToken()
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (isToken(token)) next()
+//     else next({ name: "Login" })
+//   } else next()
 // })
 
 // 2 Verify if token exists

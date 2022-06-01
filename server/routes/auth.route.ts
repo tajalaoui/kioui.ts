@@ -47,12 +47,4 @@ router.post("/verifyJwt", (req: Request, res: Response) => {
   }
 })
 
-// // * Logout
-// router.post("/logout", async (req: Request, res: Response) => {
-//   req.session.destroy(() => {
-//     // TODO handle error
-//     res.send(true)
-//   })
-// })
-
 export const authRoute: Router = router

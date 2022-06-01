@@ -9,11 +9,10 @@ export async function registerService(user: object) {
 export async function loginService(userData: object) {
   const response: AxiosResponse = await axios.post("/auth/login", userData)
   axios.defaults.headers.common["Authorization"] = `Bearer ${response.data}`
-  console.log(response)
   return response.data
 }
 
-export async function verifyJwtService(token: string | boolean): Promise<boolean> {
+export async function verifyJwtService(token: string): Promise<boolean> {
   return await axios.post("/auth/verifyJwt", token)
 }
 
