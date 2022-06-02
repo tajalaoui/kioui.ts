@@ -34,16 +34,6 @@ const router = createRouter({
   routes,
 })
 
-// 1 Verify token validation via api
-// router.beforeEach((to, from, next) => {
-//   const token = getToken()
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (isToken(token)) next()
-//     else next({ name: "Login" })
-//   } else next()
-// })
-
-// 2 Verify if token exists
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (getToken()) next()

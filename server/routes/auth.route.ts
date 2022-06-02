@@ -33,18 +33,4 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 })
 
-// * Verify jwt
-router.post("/verifyJwt", (req: Request, res: Response) => {
-  const { token } = req.body
-
-  try {
-    const verifyJwt = jwt.verify(token, process.env.JWT_SECRET)
-
-    res.send(verifyJwt)
-  } catch (e) {
-    console.log(e)
-    res.status(400).send("Error occured")
-  }
-})
-
 export const authRoute: Router = router
