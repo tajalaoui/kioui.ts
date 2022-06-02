@@ -10,7 +10,6 @@ const config = {
   },
 }
 
-// TODO send token to api to verify then set
 if (getToken()) config.headers["Authorization"] = `Bearer ${getToken()}`
 
 const axiosInstance: AxiosInstance = axios.create(config)

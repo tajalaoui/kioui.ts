@@ -1,4 +1,3 @@
-import axios from "../services/axios"
 import { verifyJwtService } from "../services/auth.service"
 
 export function getToken() {
@@ -8,8 +7,6 @@ export function getToken() {
 export async function isToken(token: string): Promise<boolean> {
   const isJwt = await verifyJwtService(token)
 
-  // if (!isJwt) return false
-  // return true
   return isJwt ? true : false
 }
 

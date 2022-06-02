@@ -1,8 +1,7 @@
 import { AxiosResponse } from "axios"
-import axios from "./axios"
+import axios from "./axios.service"
 
 export async function getPostService(id?: string): Promise<AxiosResponse> {
-  console.log(axios.defaults.headers)
   return await axios.get("/post", { params: { id } })
 }
 

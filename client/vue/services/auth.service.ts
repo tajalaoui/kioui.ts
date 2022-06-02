@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios"
-import axios from "./axios"
+import axios from "./axios.service"
 
 export async function registerService(user: object) {
   const response: AxiosResponse = await axios.post("/auth/register", user)
@@ -16,4 +16,3 @@ export async function verifyJwtService(token: string): Promise<boolean> {
   return await axios.post("/auth/verifyJwt", token)
 }
 
-// TODO Handle logout
