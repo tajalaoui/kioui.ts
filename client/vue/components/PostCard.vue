@@ -5,13 +5,8 @@ const props = defineProps<{ post: Object }>()
 
 <template>
   <div id="postCard">
-    <h1>{{ props.post.content }}</h1>
     <h1>{{ props.post.user.username }}</h1>
+    <p>{{ props.post.content }}</p>
   </div>
+  <hr />
 </template>
-
-<style>
-#postCard {
-  background: #f0efef;
-}
-</style>

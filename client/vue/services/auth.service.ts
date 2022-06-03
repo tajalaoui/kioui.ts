@@ -11,8 +11,3 @@ export async function loginService(userData: object) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${response.data}`
   return response.data
 }
-
-export async function verifyJwtService(token: string): Promise<boolean> {
-  return await axios.post("/auth/verifyJwt", token)
-}
-

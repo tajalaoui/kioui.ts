@@ -22,9 +22,9 @@ async function onRegister() {
 
 <template>
   <form @submit.prevent="onRegister">
-    <input v-model="user.username" placeholder="username" type="text" />
-    <input v-model="user.email" placeholder="email" type="email" />
-    <input v-model="user.password" placeholder="password" type="password" />
-    <button type="submit">Submit</button>
+    <input class="input" v-model="user.username" placeholder="username" type="text" />
+    <input class="input" v-model="user.email" placeholder="email" type="email" />
+    <input class="input" v-model="user.password" placeholder="password" type="password" />
+    <button class="button" type="submit">Submit</button>
   </form>
 </template>

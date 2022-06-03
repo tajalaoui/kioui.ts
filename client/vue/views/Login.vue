@@ -9,11 +9,11 @@ const user = reactive({ email: "", password: "" })
 
 async function onLogin() {
   try {
-    const token = await loginService(user) 
+    const token = await loginService(user)
     if (!token) return false
 
     setToken(token)
-    router.push({name: "Home"})
+    router.push({ name: "Home" })
   } catch (e) {
     console.log(e)
   }
@@ -22,8 +22,8 @@ async function onLogin() {
 
 <template>
   <form @submit.prevent="onLogin">
-    <input v-model="user.email" type="email" />
-    <input v-model="user.password" type="password" />
-    <button type="submit">Submit</button>
+    <input class="input" v-model="user.email" type="email" placeholder="email" />
+    <input class="input" v-model="user.password" type="password" placeholder="password" />
+    <button class="button" type="submit">Submit</button>
   </form>
 </template>

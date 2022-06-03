@@ -1,14 +1,7 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
+import { createRouter, createWebHistory, RouteMeta } from "vue-router"
 import { getToken, isToken } from "../composables/token.composable"
 
-declare module "vue-router" {
-  interface RouteMeta {
-    isAdmin?: boolean
-    requiresAuth: boolean
-  }
-}
-
-const routes: Array<RouteRecordRaw> = [
+const routes: Array<RouteMeta> = [
   {
     path: "/",
     name: "Home",

@@ -4,7 +4,6 @@ import { getPostService } from "../services/post.service"
 import PostCard from "../components/PostCard.vue"
 
 const posts = ref()
-
 onMounted(async () => {
   const response = await getPostService()
   posts.value = response.data
@@ -12,7 +11,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-for="post in posts">
-    <PostCard :key="post._id" :post="post" />
+  <div class="card">
+    <div class="card-content">
+      <div class="content" v-for="post in posts">
+        <PostCard :key="post._id" :post="post" />
+      </div>
+    </div>
   </div>
 </template>
