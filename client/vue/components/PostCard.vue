@@ -1,12 +1,16 @@
 <script setup lang="ts">
-// Add interface
 const props = defineProps<{ post: Object }>()
 </script>
 
 <template>
-  <div id="postCard">
-    <h1>{{ props.post.user.username }}</h1>
-    <p>{{ props.post.content }}</p>
+  <div class="card">
+    <div class="card-content">
+      <p class="title">{{ props.post.content }}</p>
+      <p class="subtitle">{{ props.post.user.username }}</p>
+    </div>
+    <footer class="card-footer">
+      <p class="card-footer-item"><a href="#">Like</a></p>
+      <p class="card-footer-item"><a href="#">Comment</a></p>
+    </footer>
   </div>
-  <hr />
 </template>

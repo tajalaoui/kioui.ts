@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory, RouteMeta } from "vue-router"
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
 import { getToken, isToken } from "../composables/token.composable"
 
-const routes: Array<RouteMeta> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
@@ -12,13 +12,11 @@ const routes: Array<RouteMeta> = [
     path: "/register",
     name: "Register",
     component: () => import("../views/Register.vue"),
-    meta: { requiresAuth: false },
   },
   {
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
-    meta: { requiresAuth: false },
   },
 ]
 

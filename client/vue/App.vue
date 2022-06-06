@@ -11,7 +11,7 @@ function onLogout() {
 </script>
 
 <template>
-  <nav class="navbar">
+  <nav class="navbar-end">
     <router-link to="/">Home</router-link>
     <router-link to="/register">Register</router-link>
     <router-link to="/login">Login</router-link>
@@ -32,6 +32,10 @@ function onLogout() {
   text-align: center;
   color: #000000;
   margin-top: 60px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* route transition */
@@ -65,7 +69,7 @@ input {
 }
 
 nav {
-  margin-bottom: 5%;
+  margin-bottom: 7%;
 }
 
 a {

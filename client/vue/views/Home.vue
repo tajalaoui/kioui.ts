@@ -13,7 +13,7 @@ onMounted(async () => {
 <template>
   <div class="card">
     <div class="card-content">
-      <div class="content" v-for="post in posts">
+      <div class="content py-3" v-for="post in posts">
         <PostCard :key="post._id" :post="post" />
       </div>
     </div>
