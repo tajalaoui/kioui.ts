@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios"
 import { getToken } from "../composables/token.composable"
 
-// TODO Add helpers to split code
 const config = {
   baseURL: "http://localhost:3000/api",
   headers: {
@@ -10,7 +9,9 @@ const config = {
   },
 }
 
-if (getToken()) config.headers["Authorization"] = `Bearer ${getToken()}`
+const token: string = getToken()
+
+if (token) config.headers["Authorization"] = `Bearer ${token}`
 
 const axiosInstance: AxiosInstance = axios.create(config)
 

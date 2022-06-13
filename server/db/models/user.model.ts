@@ -36,7 +36,7 @@ userSchema.pre("save", async function (next) {
 
 // TODO add expiration
 userSchema.methods.generateAuthToken = async function () {
-  return jwt.sign({ userId: this._id.toString() }, process.env.JWT_SECRET)
+  return jwt.sign({ userId: this._id.toString(), username: this.username }, process.env.JWT_SECRET)
 }
 
 userSchema.methods.isValidCredentials = async function (userPassword: string): Promise<boolean> {

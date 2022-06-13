@@ -5,7 +5,9 @@ import { IUser } from "../interfaces/IUser"
 async function createUser(input: IUser) {
   const user = await User.create<IUser>(input)
   const token = await user.generateAuthToken()
-  return token
+  const { id, username } = user
+
+  return { id, username, token }
 }
 
 async function findUser(query: FilterQuery<IUser>, options?: object, leanValue = false) {
@@ -28,7 +30,9 @@ async function loginUser({
   const token = await user.generateAuthToken()
   user.isValidCredentials(password)
 
-  return token
+  const { id, username } = user
+
+  return { id, username, token }
 }
 
 export { createUser, findUserById, findUser, loginUser }

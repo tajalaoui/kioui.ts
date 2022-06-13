@@ -33,4 +33,18 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 })
 
+// * Token
+router.post("/token", (req: Request, res: Response) => {
+  const { token } = req.body
+
+  try {
+    const query = jwt.verify(token, process.env.JWT_SECRET)
+
+    res.send(query)
+  } catch (e) {
+    console.log(e)
+    res.status(400).send("Error occured")
+  }
+})
+
 export const authRoute: Router = router

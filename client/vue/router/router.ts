@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import { getToken, isToken } from "../composables/token.composable"
+import { getToken, verifyToken } from "../composables/token.composable"
+import { useUserStore } from "../store/user.store"
+
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,10 +28,15 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (getToken()) next()
-    else next({ name: "Login" })
+    if (getToken()) {
+      const token = await verifyToken()
+      const { userId, username } = token.data
+      const userStore = useUserStore()
+      userStore.SET_USER(userId, username)
+      next()
+    } else next({ name: "Login" })
   } else next()
 })
 

@@ -1,15 +1,13 @@
-import { verifyJwtService } from "../services/auth.service"
+import axios from "../services/axios.service"
 
-export function getToken() {
+export function getToken(): string {
   return localStorage.getItem("token")
 }
 
-// export async function isToken(token: string): Promise<boolean> {
-//   const isJwt = await verifyJwtService(token)
-
-//   return isJwt ? true : false
-// }
-
 export function setToken(token: string): void {
   localStorage.setItem("token", token)
+}
+
+export async function verifyToken() {
+  return await axios.post("/auth/token", { token: getToken() })
 }

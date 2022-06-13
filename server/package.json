@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev ./app/server.ts",
+    "build": "tsc -b",
     "debug": "ts-node --inspect ./app/server.ts",
     "lint": "eslint . --ext .ts"
   },

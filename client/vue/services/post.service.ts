@@ -5,7 +5,7 @@ export async function getPostService(id?: string): Promise<AxiosResponse> {
   return await axios.get("/post", { params: { id } })
 }
 
-export async function createPostService(post: object): Promise<AxiosResponse> {
+export async function createPostService(post): Promise<AxiosResponse> {
   return await axios.post("/post", post)
 }
 

@@ -1,6 +1,18 @@
 <script setup lang="ts">
+import { onMounted } from "vue"
 import { useRouter } from "vue-router"
+import { useUserStore } from "./store/user.store"
 import { logout } from "./composables/auth.composable"
+import AppLoader from "./components/app/AppLoading.anim.vue"
+import { verifyToken } from "./composables/token.composable"
+
+onMounted(async () => {
+  // Token
+  // const token = await verifyToken()
+  // const { userId, username } = token.data
+  // const userStore = useUserStore()
+  // userStore.SET_USER(userId, username)
+})
 
 const router = useRouter()
 
@@ -19,7 +31,9 @@ function onLogout() {
   </nav>
   <router-view v-slot="{ Component }">
     <transition name="route" mode="out-in">
-      <component :is="Component"></component>
+      <div :key="Component">
+        <component :is="Component" />
+      </div>
     </transition>
   </router-view>
 </template>

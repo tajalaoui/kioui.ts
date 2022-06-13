@@ -6,7 +6,7 @@ async function bootstrap(): Promise<void> {
 
   try {
     app.listen(PORT, (): void => {
-      console.log(`Server running on port ${PORT}`)
+      console.log("Connected to server ✅")
     })
 
     await connectToMongo()

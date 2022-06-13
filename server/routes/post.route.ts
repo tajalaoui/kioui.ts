@@ -1,20 +1,16 @@
 import { Request, Response, Router } from "express"
 import { createPost, findPosts, findPost } from "../controllers/post.controller"
 import { isAuth } from "../middlewares/isAuth.middleware"
-import jwt from "jsonwebtoken"
 
 const router: Router = Router()
 
 // * Create post
 router.post("/", async (req: Request, res: Response) => {
-  const { content, user } = req.body
+  const { content, id } = req.body
 
   try {
-    // TODO implement this route in the frontend
-    const query = await createPost({
-      content,
-      user,
-    })
+    const query = await createPost(id, content)
+
     res.send(query)
   } catch (error) {
     res.send(error)
