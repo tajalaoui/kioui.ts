@@ -2,8 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
 import { getToken, verifyToken } from "../composables/token.composable"
 import { useUserStore } from "../store/user.store"
 
-
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -28,6 +26,7 @@ const router = createRouter({
   routes,
 })
 
+// TODO put the logic responsable for token verification in a service that will be called in token.composable
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (getToken()) {

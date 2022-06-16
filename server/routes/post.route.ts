@@ -4,13 +4,11 @@ import { isAuth } from "../middlewares/isAuth.middleware"
 
 const router: Router = Router()
 
-// * Create post
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", isAuth, async (req: Request, res: Response) => {
   const { content, id } = req.body
 
   try {
     const query = await createPost(id, content)
-
     res.send(query)
   } catch (error) {
     res.send(error)
@@ -18,10 +16,12 @@ router.post("/", async (req: Request, res: Response) => {
 })
 
 router.get("/:id?", isAuth, async (req: Request, res: Response) => {
+  const { id } = req.query
+
   try {
-    if (req.query.id) {
+    if (id) {
       const post = await findPost({
-        _id: req.query.id,
+        _id: id,
       })
 
       return res.send(post)

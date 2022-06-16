@@ -2,11 +2,16 @@ import { AxiosResponse } from "axios"
 import axios from "./axios.service"
 
 export async function getPostService(id?: string): Promise<AxiosResponse> {
-  return await axios.get("/post", { params: { id } })
+  const response = await axios.get("/post", { params: { id } })
+  return response.data
 }
 
-export async function createPostService(post): Promise<AxiosResponse> {
-  return await axios.post("/post", post)
+// export async function createPostService(post): Promise<AxiosResponse> {
+//   return await axios.post("/post", post)
+// }
+export async function createPostService(post) {
+  const response = await axios.post("/post", post)
+  return response.data
 }
 
 export async function updatePostService(id: string, newTask: object): Promise<AxiosResponse> {

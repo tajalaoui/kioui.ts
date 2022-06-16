@@ -5,22 +5,38 @@ import { createPostService, getPostService } from "../services/post.service"
 import { useUserStore } from "../store/user.store"
 
 onMounted(async () => {
-  const response = await getPostService()
-  posts.value = response.data
+  await getPosts()
 })
 
-const userStore = useUserStore()
-const posts = ref()
-const isCreatePost = ref(false)
+async function getPosts() {
+  const response = await getPostService()
+  posts.value = response
 
+  setTimeout(async () => {
+    await getPosts()
+  }, 5000)
+}
+
+const userStore = useUserStore()
+let posts = ref()
+const isCreatePost = ref(false)
 const postContent = ref("")
+
+async function handleInputBlurAutofocus() {
+  // if (document.activeElement instanceof HTMLElement) {
+  //  document.activeElement.blur()
+  // }
+  // document.querySelector("textarea").setAttribute("blur", "")
+}
 
 async function createPost() {
   try {
-    const data = { id: userStore.id, content: postContent.value }
-    // await createPostService(data)
-    const post = await createPostService(data)
-    posts.value.push(post)
+    const postBlueprint = { id: userStore.id, content: postContent.value }
+    const post = await createPostService(postBlueprint)
+    const newlyCreatedPost = await getPostService(post._id)
+    posts.value.push(newlyCreatedPost)
+    isCreatePost.value = false
+    postContent.value = ""
   } catch (e) {
     console.log(e)
   }
@@ -36,14 +52,25 @@ async function createPost() {
 
   <div v-if="isCreatePost" class="my-5">
     <form @submit.prevent="createPost">
-      <textarea v-model="postContent" class="textarea" autofocus></textarea>
+      <textarea
+        v-model="postContent"
+        class="textarea"
+        placeholder="Enter your post"
+        autofocus
+      ></textarea>
       <button class="button mt-3" type="submit">Submit</button>
     </form>
   </div>
 
   <div class="card">
     <div class="card-content">
-      <PostCard class="content py-3" v-for="post in posts" :key="post._id" :post="post" />
+      <PostCard
+        class="content py-3"
+        v-for="post in posts"
+        :key="post._id"
+        :post="post"
+        @inputBlurAutofocus="handleInputBlurAutofocus"
+      />
     </div>
   </div>
 </template>
