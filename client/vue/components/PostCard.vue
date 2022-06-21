@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, nextTick } from "vue"
 import type { Ref } from "vue"
+import { useUserStore } from "../store/user.store"
 import moment from "moment"
+import { commentService, likeService } from "../services/post.service"
+
+const userStore = useUserStore()
 
 interface IPostProps {
-  id: string
+  _id: string
   user: { username: string }
   content: string
   createdAt: string
@@ -13,8 +17,6 @@ interface IPostProps {
 const emit = defineEmits(["inputBlurAutofocus"])
 const props = defineProps<{ post: IPostProps }>()
 
-const isShowTextArea: Ref<boolean> = ref(false)
-let isViewMore: Ref<boolean> = ref(false)
 const postCharLimit: Ref<number> = ref(211)
 
 const getCurrentDate = computed(() => {
@@ -22,19 +24,39 @@ const getCurrentDate = computed(() => {
   return moment(date, "YYYYMMDD").fromNow()
 })
 
+let comment = ref("")
+let comments = ref([])
+const userId = userStore.$state.id
+const postId = props.post._id
+
+async function postComment() {
+  // TODO nested document
+  const commentBlueprint: string = { userId, postId, comment: comment.value }
+  const commentData = await commentService(commentBlueprint)
+  comments.push(commentData)
+}
+
+async function postLike() {
+  // TODO Send http request to check if current user like the current post if not then increment like count by one
+  let isLiked = ref(false)
+  const likeBlueprint: string = { userId, postId }
+  const commentData = await likeService(likeBlueprint)
+}
+
+const isShowTextArea: Ref<boolean> = ref(false)
+let isViewMore: Ref<boolean> = ref(false)
+
 function viewMore() {
   isViewMore.value = !isViewMore.value
 }
 
 const textarea = ref(null)
-let isAutofocus: Ref<boolean> = ref(false)
 
 async function toggleAutoFocus() {
   emit("inputBlurAutofocus")
   isShowTextArea.value = !isShowTextArea.value
   await nextTick()
-  document.querySelector(".textarea").setAttribute("autofocus", "")
-  // isAutofocus.value = true
+  textarea.value.focus()
 }
 </script>
 
@@ -58,21 +80,25 @@ async function toggleAutoFocus() {
         </p>
       </div>
       <footer class="card-footer">
-        <a class="card-footer-item" href="#"><span class="material-icons">thumb_up</span></a>
+        <a class="card-footer-item" @click="postLike"
+          ><span class="material-icons">thumb_up</span></a
+        >
         <a class="card-footer-item" @click="toggleAutoFocus"
           ><span class="material-icons">comment</span></a
         >
       </footer>
     </div>
-    <textarea
-      ref="textarea"
-      v-if="isShowTextArea"
-      :key="post.id"
-      class="textarea my-5"
-      id="textarea"
-      placeholder="Enter your comment"
-      :autofocus="isAutofocus"
-    ></textarea>
+    <!-- Comment section -->
+    <form @submit.prevent="postComment" v-if="isShowTextArea">
+      <textarea
+        class="textarea my-5"
+        ref="textarea"
+        v-model="comment"
+        id="textarea"
+        placeholder="Enter your comment"
+      ></textarea>
+      <button class="button is-primary is-fullwidth" type="submit">Submit</button>
+    </form>
   </div>
 </template>
 

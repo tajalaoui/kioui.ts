@@ -21,3 +21,13 @@ export async function updatePostService(id: string, newTask: object): Promise<Ax
 export async function deletePostService(id: string): Promise<AxiosResponse> {
   return await axios.delete(`/post/${id}`)
 }
+
+export async function commentService(comment: string) {
+  const response = await axios.post("/post/comment", comment)
+  return response.data
+}
+
+export async function likeService(like: string) {
+  const response = await axios.put("/post/like", like)
+  return response.data
+}

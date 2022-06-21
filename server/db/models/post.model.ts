@@ -8,6 +8,9 @@ const userSchema = new Schema(
       required: true,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true, required: true },
+    comment: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true, required: false },
+    likedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true, required: false },
+    likes: { type: Number, required: false },
   },
   { timestamps: true }
 )

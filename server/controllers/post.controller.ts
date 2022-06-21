@@ -17,6 +17,14 @@ export async function findPosts() {
   return Post.find().populate("user", "_id username")
 }
 
-export async function findPost(query: FilterQuery<unknown>, options?: object, leanValue = false) {
+export async function findPost(query: FilterQuery<unkown>, options?: object, leanValue = false) {
+  return Post.findOne(query, options).populate("user", "_id username").lean(leanValue)
+}
+
+export async function postLike(query: FilterQuery<string>, options?: object, leanValue = false) {
+  return Post.findOne(query, options).populate("user", "_id username").lean(leanValue)
+}
+
+export async function postComment(query: FilterQuery<string>, options?: object, leanValue = false) {
   return Post.findOne(query, options).populate("user", "_id username").lean(leanValue)
 }

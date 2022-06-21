@@ -82,6 +82,12 @@ input {
   margin: 0 5px;
 }
 
+input:focus,
+textarea:focus {
+  outline: none !important;
+  border: 1px solid #29f709 !important;
+}
+
 nav {
   margin-bottom: 7%;
 }
