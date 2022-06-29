@@ -74,7 +74,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Audiowide", cursive;
+  font-family: "Audiowide", cursive !important;
 }
 
 input {

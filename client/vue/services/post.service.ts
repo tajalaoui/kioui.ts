@@ -22,12 +22,17 @@ export async function deletePostService(id: string): Promise<AxiosResponse> {
   return await axios.delete(`/post/${id}`)
 }
 
-export async function commentService(comment: string) {
-  const response = await axios.post("/post/comment", comment)
+export async function commentService(content: object) {
+  const response = await axios.post("/post/comment", content)
   return response.data
 }
 
-export async function likeService(like: string) {
+export async function likeService(like: object) {
   const response = await axios.put("/post/like", like)
+  return response.data
+}
+
+export async function commentAuthorService(id: object) {
+  const response = await axios.get("/post/commentAuthor", id)
   return response.data
 }

@@ -43,23 +43,18 @@ router.get("/:id?", isAuth, async (req: Request, res: Response) => {
 router.put("/like", isAuth, async (req: Request, res: Response) => {
   const { userId, postId } = req.body
 
-  console.log(req.body)
-
   try {
     const query = await postLike(userId, postId)
     res.send(query)
   } catch (error) {
-    // res.send(error)
+    res.send(error)
   }
 })
 
 router.post("/comment", isAuth, async (req: Request, res: Response) => {
-  const { userId, postId, comment } = req.body
-
-  console.log(req.body)
-
+  const commentData = req.body
   try {
-    const query = await postComment(comment)
+    const query = await postComment(commentData)
     res.send(query)
   } catch (error) {
     res.send(error)

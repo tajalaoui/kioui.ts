@@ -1,8 +1,16 @@
-import { Types } from "mongoose"
+import { Types, Document, Model } from "mongoose"
 
 export interface IPost {
-  // user: Types.ObjectId
+  user: Types.ObjectId
   content: string
-  comment: string
+  comments: Types.DocumentArray<IComment>
   likes: number
+  likedBy: string
 }
+
+export interface IComment extends Types.Subdocument {
+  user: Types.ObjectId
+  postId: Types.ObjectId
+  comment: string
+}
+

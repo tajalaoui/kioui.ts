@@ -25,9 +25,7 @@ const postContent = ref("")
 async function handleInputBlurAutofocus() {
   if (document.activeElement instanceof HTMLElement) {
     document.activeElement.blur()
-    // console.log(this.$refs.textarea.focus())
   }
-  // document.querySelector("textarea").setAttribute("blur", "")
 }
 
 async function createPost() {

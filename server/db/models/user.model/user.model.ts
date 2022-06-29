@@ -1,8 +1,7 @@
 import { Schema, model } from "mongoose"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-import { IUser, IUserMethods, UserModel } from "../../interfaces/IUser"
-
+import { IUser, IUserMethods, UserModel } from "../../../interfaces/IUser"
 const userSchema = new Schema<IUser, UserModel, IUserMethods>(
   {
     username: {

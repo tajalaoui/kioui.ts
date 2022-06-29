@@ -5,8 +5,8 @@ import { useUserStore } from "./../store/user.store"
 import { setToken } from "../composables/token.composable"
 import { loginService } from "../services/auth.service"
 
-const userStore = useUserStore()
 const router = useRouter()
+const userStore = useUserStore()
 const user = reactive({ email: "", password: "" })
 
 async function onLogin() {

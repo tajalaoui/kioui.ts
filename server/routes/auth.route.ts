@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken"
 
 const router: Router = Router()
 
-// * Register
 router.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body
 
@@ -16,7 +15,6 @@ router.post("/register", async (req: Request, res: Response) => {
   res.send(query)
 })
 
-// * Login
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body
 
@@ -33,7 +31,6 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 })
 
-// * Token
 router.post("/token", (req: Request, res: Response) => {
   const { token } = req.body
 
