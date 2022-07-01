@@ -1,34 +1,11 @@
-<script setup lang="ts">
-import { onMounted } from "vue"
-import { useRouter } from "vue-router"
-import { useUserStore } from "./store/user.store"
-import { logout } from "./composables/auth.composable"
-import AppLoader from "./components/app/AppLoading.anim.vue"
-import { verifyToken } from "./composables/token.composable"
-
-onMounted(async () => {
-  // Token
-  // const token = await verifyToken()
-  // const { userId, username } = token.data
-  // const userStore = useUserStore()
-  // userStore.SET_USER(userId, username)
-})
-
-const router = useRouter()
-
-function onLogout() {
-  logout()
-  router.push({ name: "Login" })
-}
-</script>
-
 <template>
-  <nav class="navbar-end">
-    <router-link to="/">Home</router-link>
-    <router-link to="/register">Register</router-link>
-    <router-link to="/login">Login</router-link>
-    <a @click="onLogout">Logout</a>
-  </nav>
+  <router-view name="AppNavBar" v-slot="{ Component }">
+    <transition name="route" mode="out-in">
+      <div :key="Component">
+        <component :is="Component" />
+      </div>
+    </transition>
+  </router-view>
   <router-view v-slot="{ Component }">
     <transition name="route" mode="out-in">
       <div :key="Component">

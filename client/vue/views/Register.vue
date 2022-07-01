@@ -3,7 +3,7 @@ import { reactive } from "vue"
 import { useRouter } from "vue-router"
 import { setToken } from "../composables/token.composable"
 import { registerService } from "../services/auth.service"
-import { useUserStore } from "../store/user.store";
+import { useUserStore } from "../store/user.store"
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -31,4 +31,6 @@ async function onRegister() {
     <input class="input" v-model="user.password" placeholder="password" type="password" />
     <button class="button" type="submit">Submit</button>
   </form>
+
+  <p class="mt-5">You already have an account? <router-link class="is-underlined has-text-weight-semibold" to="/login">Login</router-link></p>
 </template>

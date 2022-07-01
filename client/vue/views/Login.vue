@@ -31,4 +31,6 @@ async function onLogin() {
     <input class="input" v-model="user.password" type="password" placeholder="password" />
     <button class="button" type="submit">Submit</button>
   </form>
+
+  <p class="mt-5">Don't have an account? <router-link class="is-underlined has-text-weight-semibold" to="/register">Register</router-link></p>
 </template>

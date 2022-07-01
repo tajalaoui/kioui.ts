@@ -31,8 +31,3 @@ export async function likeService(like: object) {
   const response = await axios.put("/post/like", like)
   return response.data
 }
-
-export async function commentAuthorService(id: object) {
-  const response = await axios.get("/post/commentAuthor", id)
-  return response.data
-}

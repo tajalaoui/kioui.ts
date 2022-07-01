@@ -17,7 +17,9 @@ export async function createPost(user: string, content: string) {
 }
 
 export async function findPosts() {
-  return await Post.find().populate("user comments.user")
+  return await Post.find()
+    .populate("user comments.user")
+    .sort({ createdAt: -1, "comments.createdAt": -1 })
 }
 
 export async function findPost(query: FilterQuery<unknown>, options?: object, leanValue = false) {

@@ -1,18 +1,9 @@
 <script setup lang="ts">
-import { onMounted, computed, ref, nextTick } from "vue"
+import { onMounted, computed, ref, nextTick, watchEffect } from "vue"
 import type { Ref } from "vue"
 import { useUserStore } from "../store/user.store"
 import moment from "moment"
-import {
-  commentAuthorService,
-  commentService,
-  getPostService,
-  likeService,
-} from "../services/post.service"
-
-onMounted(async () => {
-  await getCommentAuthor(props.post.comments.user)
-})
+import { commentService, getPostService, likeService } from "../services/post.service"
 
 const userStore = useUserStore()
 
@@ -21,7 +12,8 @@ interface IPostProps {
   user: { username: string }
   content: string
   likes: number
-  comments: { _id: string; content: string }
+  comments: { _id: string; content: string; user: string; createdAt: string }
+  likedBy: string
   createdAt: string
 }
 
@@ -32,21 +24,24 @@ const postCharLimit: Ref<number> = ref(211)
 
 let commentInput: Ref<string> = ref("")
 let comments: Ref<string[]> = ref([...props.post.comments])
-let commentAuthor: Ref<string> = ref()
 const userId: string = userStore.$state.id
 const postId: string = props.post._id
 let isLiked = ref(false)
 let postLikesCount: Ref<number> = ref(props.post.likedBy.length)
 
-async function getPosts() {
-  await getPostService()
-}
+// To update likes and comments live
+watchEffect(async () => {
+  const fromParentLikes = props.post.likedBy.length
+  postLikesCount.value = fromParentLikes
+
+  const fromParentComments = [...props.post.comments]
+  comments.value = fromParentComments
+})
 
 async function postComment() {
   const commentBlueprint: object = { userId, postId, content: commentInput.value }
   const commentData = await commentService(commentBlueprint)
-  comments.value.push(commentData)
-  console.log(commentData)
+  comments.value.unshift(commentData)
   commentInput.value = ""
 }
 
@@ -77,16 +72,6 @@ const getCurrentDate = computed(() => {
   const date = new Date(props.post.createdAt)
   return moment(date, "YYYYMMDD").fromNow()
 })
-// TODO props.post.id get comments data only when i click open comment icon
-const commentDate = computed(() => {
-  return comments.value.map((x) => {
-    x.createdAt = moment(x.createdAt, "YYYYMMDD").fromNow()
-  })
-})
-
-async function getCommentAuthor(id) {
-  return await commentAuthorService(id)
-}
 </script>
 
 <template>

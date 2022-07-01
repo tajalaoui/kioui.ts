@@ -33,7 +33,7 @@ async function createPost() {
     const postBlueprint = { id: userStore.id, content: postContent.value }
     const post = await createPostService(postBlueprint)
     const newlyCreatedPost = await getPostService(post._id)
-    posts.value.push(newlyCreatedPost)
+    posts.value.unshift(newlyCreatedPost)
     isCreatePost.value = false
     postContent.value = ""
   } catch (e) {

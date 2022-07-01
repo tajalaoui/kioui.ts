@@ -6,7 +6,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue"),
+    components: {
+      default: () => import("../views/Home.vue"),
+      AppNavBar: () => import("../layouts/AppNavBar.vue"),
+    },
     meta: { requiresAuth: true },
   },
   {
