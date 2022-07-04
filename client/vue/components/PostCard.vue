@@ -3,7 +3,7 @@ import { onMounted, computed, ref, nextTick, watchEffect } from "vue"
 import type { Ref } from "vue"
 import { useUserStore } from "../store/user.store"
 import moment from "moment"
-import { commentService, getPostService, likeService } from "../services/post.service"
+import { commentService, likeService } from "../services/post.service"
 
 const userStore = useUserStore()
 

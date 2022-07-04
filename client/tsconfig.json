@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "baseUrl": "vue",
     "useDefineForClassFields": true,
     "moduleResolution": "node",
     "strict": true,
@@ -15,9 +14,7 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    // "paths": {
-    //   "@composables/*": ["composables/*"]
-    // }
+    "allowSyntheticDefaultImports": true
   },
   "references": [{ "path": "./tsconfig.node.json" }],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

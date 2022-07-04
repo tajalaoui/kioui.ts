@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
-import PostCard from "../components/PostCard.vue"
+import PostCard from "@/components/PostCard.vue"
 import { createPostService, getPostService } from "../services/post.service"
 import { useUserStore } from "../store/user.store"
 
