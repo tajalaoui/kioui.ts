@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref, defineAsyncComponent } from "vue"
-// import PostCard from "@/components/PostCard.vue"
 import { createPostService, getPostService } from "../services/post.service"
 import { useUserStore } from "../store/user.store"
 const PostCard = defineAsyncComponent(() => import("@/components/PostCard.vue"))
