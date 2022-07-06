@@ -89,7 +89,12 @@ const getCurrentDate = computed(() => {
           v-show="post.content.length >= postCharLimit"
         ></p>
         <p class="subtitle has-text-left">
-          Posted by <span class="has-text-primary" id="username">{{ post.user.username }}</span>
+          Posted by
+          <router-link :to="{ name: 'Profile', params: { id: post.user.username } }"
+            ><span class="has-text-primary" id="username">{{
+              post.user.username
+            }}</span></router-link
+          >
           {{ getCurrentDate }}
         </p>
       </div>

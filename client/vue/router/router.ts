@@ -13,6 +13,15 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/profile/:id",
+    name: "Profile",
+    components: {
+      default: () => import("../views/Profile.vue"),
+      AppNavBar: () => import("../layouts/AppNavBar.vue"),
+    },
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/register",
     name: "Register",
     component: () => import("../views/Register.vue"),
