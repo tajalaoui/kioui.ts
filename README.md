@@ -1,4 +1,6 @@
-# Vue3.ts + Express + Vite
+# Kioui.ts
+
+Reddit is an open source social social network, content rating, and discussion website. Registered users submit content to the site such as links, text posts, which are then voted up by other members
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
